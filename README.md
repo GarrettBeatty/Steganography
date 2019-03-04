@@ -158,5 +158,3 @@ Bit Shift 8
 
 ![alt text](images/city8.png "Bit Shift 8")
 
-
-# Steganography
