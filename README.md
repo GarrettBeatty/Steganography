@@ -50,7 +50,7 @@ To do this the padding is calculated with `padding = bit_split - (number of bits
 #### Header
 
 In order to embed the message attributes and encoding info into the image, a header is used.
-The header is contained in the first 42 + 32 (optional) least significant bits of every byte.
+The header is in the 46 + (32 optional) least significant bits of every byte.
 
 The header is encoded as:
 * Bit Split (4 bits)
@@ -74,9 +74,36 @@ Python3 is required.
 pip3 install -r requirements.txt
 ```
 
+## Using the Library
+
+Here is an example of hiding an image within another image.
+
+```
+from steganography.message import Message
+from steganography.source import Source
+from steganography.steganography import Steganography
+
+source_image = 'path/to/my/image.jpg
+source = Source(source_image, source_type='image')
+
+message_image = 'path/to/my/message.jpg'
+message = Message(message_image, message_type='image')
+
+bit_split = 2
+
+encoded = Steganography.encode(source, message, bit_split)
+
+#encoded is a numpy array, need to convert back to an image
+image = Image.fromarray(encoded)
+
+
+```
+
+
 ## How to Run From Command Line
 
-### To Encode
+### Command Line Parameters
+
 Parameters:
 * --source: Source Image
 * --source-type: 'image'
@@ -86,7 +113,7 @@ Parameters:
 * --bit-split: (Optional, default is 2) Number of least significant bits to use to encode message.
 * --output: Output file
 
-### To Encode
+### To Encode Using Command Line
 
 ```
 python3 cli.py --source <source> --encode --message <message> --bit-split <bitsplit> --output <output> --source-type <source_type> --message-type <message_type>
@@ -97,7 +124,7 @@ Example:
 python3 cli.py --source images/city.jpg --encode --message images/message.jpeg --bit-split 8 --output ~/Desktop/output.png --source-type image --message-type image
 ```
 
-### To Decode
+### To Decode using Command Line
 
 ```
 python3 cli.py --source <source> --decode --output <output> --source-type <source_type>
