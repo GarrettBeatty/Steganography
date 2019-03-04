@@ -137,7 +137,7 @@ python3 cli.py --source <source> --decode --output <output> --source-type <sourc
 Example:
 
 ```
-python3 cli.py --source ~/Desktop/source.png --decode --output ~/Desktop/output.png --source-type image```
+python3 cli.py --source ~/Desktop/source.png --decode --output ~/Desktop/output.png --source-type image
 ```
 
 ## Run the Tests
