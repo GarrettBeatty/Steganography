@@ -109,10 +109,11 @@ image = Image.fromarray(encoded)
 
 Parameters:
 * --source: Source Image
-* --source-type: 'image'
-* --encode: Will encode if flag is set
+* --source-type: Source type: 'image'
 * --message: Image file, Text File, or String
-* --message-type: 'text', 'text_file, 'text_stream', 'image', or 'image_array'
+* --message-type: Message type: 'text', 'text_file, 'text_stream', 'image', or 'image_array'
+* --encode: Will encode if flag is set
+* --decode: Will decode if flag is set
 * --bit-split: (Optional, default is 2) Number of least significant bits to use to encode message.
 * --output: Output file
 
