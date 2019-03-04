@@ -12,12 +12,14 @@ class Steganography:
     @staticmethod
     def decode(source):
         """
+        Decodes source
 
-        :param source:
-        :type source:
-        :return:
-        :rtype:
+        :param source: Source
+        :type source: Source
+        :return: message, message_type, extras
+        :rtype: Message, str, list
         """
+
         offset = 0
         bit_split = source.source[:offset + 4, -1:]
         bit_split = bit_split.squeeze()
@@ -66,14 +68,14 @@ class Steganography:
     def encode(source, message, bit_split):
         """
 
-        :param source:
-        :type source:
-        :param message:
-        :type message:
-        :param bit_split:
-        :type bit_split:
-        :return:
-        :rtype:
+        :param source: Source
+        :type source: Source
+        :param message: Message
+        :type message: Message
+        :param bit_split: Bit split
+        :type bit_split: int
+        :return: Encoded source
+        :rtype: numpy array
         """
 
         if bit_split > 8:

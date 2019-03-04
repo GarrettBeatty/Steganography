@@ -136,4 +136,9 @@ Example:
 python3 cli.py --source ~/Desktop/source.png --decode --output ~/Desktop/output.png --source-type image```
 ```
 
+## Run the Tests
+
+```
+
+```
 

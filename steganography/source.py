@@ -2,11 +2,17 @@ import numpy as np
 from PIL import Image
 
 class Source:
-    """
 
-    """
 
     def __init__(self, source, source_type):
+        """
+
+        :param source: Source Image
+        :type source: Path to image, File, etc
+        :param source_type: Source Type: 'image'
+        :type source_type: str
+        """
+
         if source_type == 'image':
             source = Image.open(source)
         else:
