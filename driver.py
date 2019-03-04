@@ -5,7 +5,7 @@ from PIL import Image
 
 from steganography.message import Message
 from steganography.source import Source
-from steganography.steg import Steganography
+from steganography.steganography import Steganography
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
