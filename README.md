@@ -68,10 +68,13 @@ Decoding is simple if the header format is known. The header tells the program w
 
 ## Installation
 
-Python3 is required.
+Manually Install
 
 ```
+git clone https://github.com/GarrettBeatty/Steganography.git
+cd Steganography
 pip3 install -r requirements.txt
+pip3 install -e .
 ```
 
 ## Using the Library
@@ -139,6 +142,6 @@ python3 cli.py --source ~/Desktop/source.png --decode --output ~/Desktop/output.
 ## Run the Tests
 
 ```
-
+python3 -m unittest discover tests
 ```
 
