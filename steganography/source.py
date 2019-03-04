@@ -2,6 +2,9 @@ import numpy as np
 from PIL import Image
 
 class Source:
+    """
+
+    """
 
     def __init__(self, source, source_type):
         if source_type == 'image':

@@ -1,7 +1,11 @@
 import numpy as np
 from PIL import Image
 
+
 class Message:
+    """
+
+    """
 
     @staticmethod
     def convert_to_type(encoded, message_type, extras):
