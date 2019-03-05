@@ -147,6 +147,6 @@ python3 cli.py --source ~/Desktop/source.png --decode --output ~/Desktop/output.
 ## Run the Tests
 
 ```
-python3 -m unittest discover tests
+nosetests --with-coverage --cover-package=steganography
 ```
 
