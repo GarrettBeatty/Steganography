@@ -7,3 +7,5 @@ install:
 # command to run tests
 script:
   - python -m unittest discover tests
+after_success:
+  - coveralls

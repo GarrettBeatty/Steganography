@@ -1,5 +1,9 @@
 # Steganography
 
+[![Build Status](https://travis-ci.org/GarrettBeatty/Steganography.svg?branch=master)](https://travis-ci.org/GarrettBeatty/Steganography)
+[![Coverage Status](https://coveralls.io/repos/github/GarrettBeatty/Steganography/badge.svg?branch=master)](https://coveralls.io/github/GarrettBeatty/Steganography?branch=master)
+
+
 See it in action at [encode.gbt.codes](http://encode.gbt.codes).
 
 Original:
@@ -86,7 +90,7 @@ from steganography.message import Message
 from steganography.source import Source
 from steganography.steganography import Steganography
 
-source_image = 'path/to/my/image.jpg
+source_image = 'path/to/my/image.jpg'
 source = Source(source_image, source_type='image')
 
 message_image = 'path/to/my/message.jpg'
