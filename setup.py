@@ -9,8 +9,7 @@ setup(name='steganography',
       license='MIT',
       packages=['steganography'],
       install_requires=[
-          'Werkzeug',
-          'numpy',
-          'Pillow'
-      ],
-      zip_safe=False)
+          'Werkzeug>=0.14.1',
+          'numpy>=1.16.1',
+          'Pillow>=5.4.1'
+      ])
