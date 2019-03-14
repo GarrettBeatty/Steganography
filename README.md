@@ -83,7 +83,9 @@ pip3 install -r requirements.txt
 pip3 install -e .
 ```
 
-## Using the Library
+## Using the Library in Python
+
+Look at `tests/test_steganography.py` for examples.
 
 ## How to Run From Command Line
 
