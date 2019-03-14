@@ -21,11 +21,15 @@ Decoded Hidden Message:
 ## How It Works
 
 ### Supported Source Images
-* Images (8 bit per channel) (must be PNG)
+* Image File
+* Array
 
 ### Supported Message Types
-* RGB Images (assumes 8 bits per channel) (must be PNG)
+* Image File
+* Text File
+* Text Stream
 * Text
+* Array
 
 ### Encoding
 
@@ -57,6 +61,12 @@ In order to embed the message attributes and encoding info into the image, a hea
 
 The header is encoded as:
 
+* bit split (4 bits)
+* padding (4 bits)
+* message length (32 bits)
+* message type (2 bits)
+* num extras (4 bits)
+* extras (16 bits each)
 
 ### Decoding
 
@@ -80,11 +90,35 @@ pip3 install -e .
 ### Command Line Parameters
 
 Parameters:
+* --source Path to source file
+* --source-type: Source type: 'image'
+* --message: Image file, Text File, or String
+* --message-type: Message type: 'text', 'text_file,, 'image'
+* --encode: Will encode if flag is set
+* --decode: Will decode if flag is set
+* --bit-split: (Optional, default is 2) Number of least significant bits to use to encode message.
+* --output: Output file
 
 ### To Encode Using Command Line
 
+```
+python3 cli.py --source <source> --encode --message <message> --bit-split <bitsplit> --output <output> --source-type <source-type> --message-type <message-type>
+```
+Example:
+
+``` 
+python3 cli.py --source images/city.jpg --encode --message images/message.jpeg --bit-split 2 --output images/encoded.png --source-type image --message-type image
+```
 
 ### To Decode using Command Line
+
+```
+python3 cli.py --source <source> --decode --output <output> --source-type <source-type>
+```
+Example:
+``` 
+python3 cli.py --source images/encoded.png --decode --output ~/Desktop/garrett.png --source-type image
+```
 
 ## Run the Tests
 
