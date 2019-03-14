@@ -32,6 +32,12 @@ class TestMessageTypes(unittest.TestCase):
         decoded_array = decoded_array.reshape(shape)
         assert np.array_equal(decoded_array, message)
 
+    def test_message_text_file(self):
+        encoded = Steganography.encode('tests/test_data/city.jpg', 'tests/test_data/test.txt', 2, 'image', 'text_file')
+        decoded = Steganography.decode(encoded)[0]
+        decoded_text = ''.join(chr(x) for x in decoded)
+        assert decoded_text == 'testing'
+
     def test_message_text_stream(self):
         f = tempfile.NamedTemporaryFile(delete=False)
         f.write(b'testing')
