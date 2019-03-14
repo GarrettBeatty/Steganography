@@ -3,7 +3,6 @@ from PIL import Image
 
 
 class Source:
-
     @staticmethod
     def from_image(filename):
         source = np.array(Image.open(filename), dtype=np.uint8)
