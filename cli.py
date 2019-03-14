@@ -2,9 +2,6 @@ import argparse
 import os
 
 from PIL import Image
-
-from steganography.message import Message
-from steganography.source import Source
 from steganography.steganography import Steganography
 
 if __name__ == "__main__":
@@ -24,9 +21,7 @@ if __name__ == "__main__":
         if not args.message or not args.source_type or not args.message_type:
             parser.error('Must include --message, --source-type, and --message-type')
 
-        source = Source(args.source, args.source_type)
-        message = Message(args.message, args.message_type)
-        encoded = Steganography.encode(source, message, args.bit_split)
+        encoded = Steganography.encode(args.source, args.message, args.bit_split, args.source_type, args.message_type)
         image_encoded = Image.fromarray(encoded)
 
         fp = args.output
@@ -35,16 +30,14 @@ if __name__ == "__main__":
         print('File saved to', fp)
 
     elif args.decode:
-        source = Source(args.source, args.source_type)
-        message, message_type, extras = Steganography.decode(source)
+        message, message_type, extras = Steganography.decode(args.source, args.source_type)
 
-        message = Message.convert_to_type(message, message_type, extras)
         fp = args.output
 
         os.makedirs(os.path.dirname(os.path.abspath(fp)), exist_ok=True)
-
         if message_type == 'image':
-            message.save(fp, format='png')
+            message_image = Image.fromarray(message.reshape(extras))
+            message_image.save(fp, format='png')
         else:
             with open(fp, 'w') as f:
                 f.write(message)

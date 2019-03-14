@@ -54,16 +54,8 @@ To do this the padding is calculated with `padding = bit_split - (number of bits
 #### Header
 
 In order to embed the message attributes and encoding info into the image, a header is used.
-The header is in the 46 + (32 optional) least significant bits of every byte.
 
 The header is encoded as:
-* Bit Split (4 bits)
-* Padding (4 bits)
-* Message Length (32 bits)
-* Message Type (2 bits)
-* Number of extras (4 bits)
-* Height (optional extra) (16 bits)
-* Width (optional extra) (16 bits)
 
 
 ### Decoding
@@ -83,66 +75,16 @@ pip3 install -e .
 
 ## Using the Library
 
-Here is an example of hiding an image within another image.
-
-```
-from steganography.message import Message
-from steganography.source import Source
-from steganography.steganography import Steganography
-
-source_image = 'path/to/my/image.jpg'
-source = Source(source_image, source_type='image')
-
-message_image = 'path/to/my/message.jpg'
-message = Message(message_image, message_type='image')
-
-bit_split = 2
-
-encoded = Steganography.encode(source, message, bit_split)
-
-#encoded is a numpy array, need to convert back to an image
-image = Image.fromarray(encoded)
-
-
-```
-
-
 ## How to Run From Command Line
 
 ### Command Line Parameters
 
 Parameters:
-* --source: Source Image
-* --source-type: Source type: 'image'
-* --message: Image file, Text File, or String
-* --message-type: Message type: 'text', 'text_file, 'text_stream', 'image', or 'image_array'
-* --encode: Will encode if flag is set
-* --decode: Will decode if flag is set
-* --bit-split: (Optional, default is 2) Number of least significant bits to use to encode message.
-* --output: Output file
 
 ### To Encode Using Command Line
 
-```
-python3 cli.py --source <source> --encode --message <message> --bit-split <bitsplit> --output <output> --source-type <source_type> --message-type <message_type>
-```
-
-Example:
-```
-python3 cli.py --source images/city.jpg --encode --message images/message.jpeg --bit-split 8 --output ~/Desktop/output.png --source-type image --message-type image
-```
 
 ### To Decode using Command Line
-
-```
-python3 cli.py --source <source> --decode --output <output> --source-type <source_type>
-```
-
-Example:
-
-```
-python3 cli.py --source ~/Desktop/source.png --decode --output ~/Desktop/output.png --source-type image
-```
 
 ## Run the Tests
 
