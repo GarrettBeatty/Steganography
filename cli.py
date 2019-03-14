@@ -39,8 +39,9 @@ if __name__ == "__main__":
             message_image = Image.fromarray(message.reshape(extras))
             message_image.save(fp, format='png')
         else:
+            decoded_text = ''.join(chr(x) for x in message)
             with open(fp, 'w') as f:
-                f.write(message)
+                f.write(decoded_text)
 
         print('File saved to', fp)
 
