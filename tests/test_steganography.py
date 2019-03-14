@@ -12,22 +12,22 @@ class TestMessageTypes(unittest.TestCase):
 
     def test_message_text(self):
         message = 'hi'
-        encoded = Steganography.encode('test_data/city.jpg', message, 2, 'image', 'text')
+        encoded = Steganography.encode('tests/test_data/city.jpg', message, 2, 'image', 'text')
         decoded = Steganography.decode(encoded)[0]
         decoded_text = ''.join(chr(x) for x in decoded)
         assert decoded_text == message
 
     def test_message_image(self):
-        message = 'test_data/message.jpeg'
+        message = 'tests/test_data/message.jpeg'
         message_array = np.array(Image.open(message))
-        encoded = Steganography.encode('test_data/city.jpg', message, 2, 'image', 'image')
+        encoded = Steganography.encode('tests/test_data/city.jpg', message, 2, 'image', 'image')
         decoded_image, _, shape = Steganography.decode(encoded)
         decoded_image = decoded_image.reshape(shape)
         assert np.array_equal(decoded_image, message_array)
 
     def test_message_array(self):
         message = np.random.randint(0, 100, size=(100, 2))
-        encoded = Steganography.encode('test_data/city.jpg', message, 2, 'image', 'array')
+        encoded = Steganography.encode('tests/test_data/city.jpg', message, 2, 'image', 'array')
         decoded_array, _, shape = Steganography.decode(encoded)
         decoded_array = decoded_array.reshape(shape)
         assert np.array_equal(decoded_array, message)
@@ -36,7 +36,7 @@ class TestMessageTypes(unittest.TestCase):
         f = tempfile.NamedTemporaryFile(delete=False)
         f.write(b'testing')
         message = FileStorage(f)
-        encoded = Steganography.encode('test_data/city.jpg', message, 2, 'image', 'text_stream')
+        encoded = Steganography.encode('tests/test_data/city.jpg', message, 2, 'image', 'text_stream')
         decoded = Steganography.decode(encoded)[0]
         decoded_text = ''.join(chr(x) for x in decoded)
         assert decoded_text == 'testing'
@@ -54,7 +54,7 @@ class TestSourceTypes(unittest.TestCase):
 
     def test_source_image(self):
         message = 'hi'
-        encoded = Steganography.encode('test_data/city.jpg', message, 2, 'image', 'text')
+        encoded = Steganography.encode('tests/test_data/city.jpg', message, 2, 'image', 'text')
         decoded = Steganography.decode(encoded)[0]
         decoded_text = ''.join(chr(x) for x in decoded)
         assert decoded_text == message
