@@ -5,6 +5,9 @@ from .source import Source
 
 
 class Steganography:
+    """
+
+    """
 
     type_map = {
         "array": "00",
@@ -18,6 +21,16 @@ class Steganography:
 
     @staticmethod
     def decode(source, source_type="array"):
+        """
+        Decodes the source and returns the hidden message.
+
+        :param source: The source
+        :type source: numpy.array
+        :param source_type: Source type
+        :type source_type: str
+        :return: Hidden message
+        :rtype: numpy.array
+        """
 
         if source_type == "array":
             source, source_original_shape = Source.from_array(source)
@@ -33,25 +46,25 @@ class Steganography:
         bit_split = int(bit_split, 2)
         offset = offset + 4
 
-        padding = source[offset : offset + 4, -1:]
+        padding = source[offset: offset + 4, -1:]
         padding = padding.squeeze()
         padding = "".join([str(num) for num in padding])
         padding = int(padding, 2)
         offset = offset + 4
 
-        message_length = source[offset : offset + 32, -1:]
+        message_length = source[offset: offset + 32, -1:]
         message_length = message_length.squeeze()
         message_length = "".join([str(num) for num in message_length])
         message_length = int(message_length, 2)
         offset = offset + 32
 
-        message_type = source[offset : offset + 2, -1:]
+        message_type = source[offset: offset + 2, -1:]
         message_type = message_type.squeeze()
         message_type = "".join([str(num) for num in message_type])
         message_type = Steganography.inv_type_map[message_type]
         offset = offset + 2
 
-        num_extras = source[offset : offset + 4, -1:]
+        num_extras = source[offset: offset + 4, -1:]
         num_extras = num_extras.squeeze()
         num_extras = "".join([str(num) for num in num_extras])
         num_extras = int(num_extras, 2)
@@ -59,19 +72,35 @@ class Steganography:
 
         extras = []
         for extra in range(num_extras):
-            extra = source[offset : offset + 16, -1:]
+            extra = source[offset: offset + 16, -1:]
             extra = extra.squeeze()
             extra = "".join([str(num) for num in extra])
             extras.append(int(extra, 2))
             offset = offset + 16
 
-        message = source[offset : offset + message_length, -bit_split:]
+        message = source[offset: offset + message_length, -bit_split:]
         message = message.reshape((-1,))[:-padding]
         message = np.packbits(message)
         return message, message_type, extras
 
     @staticmethod
     def encode(source, message, bit_split, source_type="array", message_type="array"):
+        """
+        Encodes the message into the source.
+
+        :param source: Source
+        :type source: numpy.array
+        :param message: Message
+        :type message: numpy.array
+        :param bit_split: Bit split
+        :type bit_split: int
+        :param source_type: Source type
+        :type source_type: str
+        :param message_type: Message type
+        :type message_type: str
+        :return: Encoded image
+        :rtype: numpy.array
+        """
 
         if bit_split > 8:
             raise Exception("Bit Split must be >= 1 and <= 8")
@@ -133,7 +162,7 @@ class Steganography:
 
         # write message
         offset = header.shape[0]
-        encoded[offset : offset + message.shape[0], -bit_split:] = message
+        encoded[offset: offset + message.shape[0], -bit_split:] = message
 
         # converts back to regular numbers and reshapes to original size
         encoded = np.packbits(encoded)
