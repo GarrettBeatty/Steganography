@@ -12,8 +12,8 @@ class Message:
         :type filename: str, File
         :param bit_split: Bit split
         :type bit_split: int
-        :return: Padded and reshaped message, padding
-        :rtype: numpy.array, int
+        :return: Padded and reshaped message, padding, original shape
+        :rtype: numpy.array, int, tuple
         """
         message = Image.open(filename)
         message = np.array(message, dtype=np.uint8)
@@ -28,8 +28,8 @@ class Message:
         :type array: numpy.array
         :param bit_split: Bit split
         :type bit_split: int
-        :return: Padded and reshaped message, padding
-        :rtype: numpy.array, int
+        :return: Padded and reshaped message, padding, original shape
+        :rtype: numpy.array, int, tuple
         """
         message = np.array(array, dtype=np.uint8)
         return (
@@ -46,8 +46,8 @@ class Message:
         :type text: str
         :param bit_split: Bit split
         :type bit_split: int
-        :return: Padded and reshaped message, padding
-        :rtype: numpy.array, int
+        :return: Padded and reshaped message, padding, original shape
+        :rtype: numpy.array, int, tuple
         """
         message = [ord(x) for x in text]
         message = np.array(message, dtype=np.uint8)
@@ -62,8 +62,8 @@ class Message:
         :type filename: str, File
         :param bit_split: Bit split
         :type bit_split: int
-        :return: Padded and reshaped message, padding
-        :rtype: numpy.array, int
+        :return: Padded and reshaped message, padding, original shape
+        :rtype: numpy.array, int, tuple
         """
         with open(filename, "r") as f:
             m = []
@@ -82,8 +82,8 @@ class Message:
         :type stream: stream
         :param bit_split: Bit split
         :type bit_split: int
-        :return: Padded and reshaped message, padding
-        :rtype: numpy.array, int
+        :return: Padded and reshaped message, padding, original shape
+        :rtype: numpy.array, int, tuple
         """
         stream.seek(0)
         m = stream.read()
@@ -101,8 +101,8 @@ class Message:
         :type message: numpy.array
         :param bit_split: Bit split
         :type bit_split: int
-        :return: Padded and reshaped message, padding
-        :rtype: numpy.array, int
+        :return: Padded and reshaped message, padding, original shape
+        :rtype: numpy.array, int, tuple
         """
 
         padding = bit_split - message.shape[0] % bit_split
